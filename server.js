@@ -1,3 +1,6 @@
+// load environment vars from .env 
+require('dotenv').config();
+
 // dependencies
 var express = require('express'),
 	path = require('path'),
@@ -32,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 // ROUTING 
 app.use('/', index);
-app.use('/api/v1', todos);
+app.use(process.env.API_BASE, todos);
 
 app.use(function(req, res, next){
 	var err = new Error('Not Found');
@@ -42,7 +45,7 @@ app.use(function(req, res, next){
 
 
 var server = app.listen(3000, function(){
-	var host = 'localhost';
+	var host = process.env.DB_HOST;
 	var port = server.address().port;
 	console.log('App listening at http://%s:%s', host, port);
 });

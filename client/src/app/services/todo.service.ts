@@ -16,14 +16,19 @@ export class TodoService {
   	return this._http.get('/api/v1/todos').map(res=>res.json());
   }
 
+  private setHeaders(){
+  	let headers = new Headers();
+  	headers.append('Content-Type','application/json');
+  	return headers;
+  }
+
   /**
    * POST a todo to the DB 
    * @param {Todo} todo [description]
    */
   saveTodo(todo:Todo){
-  	let headers = new Headers();
-  	headers.append('Content-Type','application/json');
-  	return this._http.post('/api/v1/todo', JSON.stringify(todo), {headers:headers})
+  	
+  	return this._http.post('/api/v1/todo', JSON.stringify(todo), {headers:this.setHeaders()})
   						.map(res=>res.json());
 
   }

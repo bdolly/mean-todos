@@ -62,8 +62,8 @@ router.get('/todo/:id',function(req, res, next){
  			"error":"Invalid Data"
  		});
  	}else{
- 		db.todos.updae({
- 			_id:mongojs.ObjectId(req.parmas.id)
+ 		db.todos.update({
+ 			_id:mongojs.ObjectId(req.params.id)
  		}, updObj,{}, function(err, result){
  			errorHandler(res, err, result);
  		})
@@ -78,7 +78,7 @@ router.get('/todo/:id',function(req, res, next){
  router.delete('/todo/:id', function(req, res, next){
  	
  	db.todos.remove({
- 		_id: mongojs.ObjectId(req.params.id)
+ 		_id:mongojs.ObjectId(req.params.id)
  	},'', function(err, result){
  		if(err){
 				res.send(err);
